@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* =====================
+--- Main Body Content  ---
+====================== */
+.main-body {
+  background-color: #192c63;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  min-height: 0.5vh;
+  max-height: auto; /* 111rem */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  justify-items: center; /* Centra los items en cada celda */
+  margin: 0 auto;        /* Centra el grid en el contenedor padre */
+  max-width: 1000px;
+}
+/* =====================
+--- Container -- Wrapper ---
+====================== */
+.wrapper {
+  width: 90%;
+  margin: 0rem auto;
+  padding-left: 8rem; /* Espacio interno lados ambos */
+  padding-right: 8rem;
+}
+
+/* ==================================
+--- Navbar - Logo - Nav-Menu ---
+===================================== */
+
+.top-header .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+}
+
+.logo-text {
+  font-size: 2.5em;
+  animation: color-change 8s infinite; /* Duración: 3 segundos, repetición infinita */
+}
+
+.logo-text span {
+  color: rgb(10,165,165);
+  text-shadow: 1px 1px 3px white;
+}
+
+
+@keyframes color-change {
+  0% {
+    color:#bb0b83; /* Color inicial */
+  }
+  50% {
+    color: #0443ff; /* Segundo color */
+  }
+  100% {
+    color: rgb(10,165,165); /* Color final (vuelve al inicial) */
+  }
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding: 0
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-menu a:hover {
+  color: rgb(10,165,165); /* Cambia el color al pasar el mouse */
+  text-decoration: underline; /* Subrayado al pasar el cursor */
+  text-underline-offset: 7px; /* Ajusta la distancia de la línea */
+}
+
+/* ===============================================
+--- Main-ctn - Biografía - Foto-container ---
+================================================== */
+
+.main-ctn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem; /* Espacio entre columnas */
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.main-ctn .typing {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid white;
+  width: 0;
+  animation: typing 2s steps(25) forwards, 
+    blink 0.75s step-end infinite;
+  animation-delay: 0s, 4s;
+  animation-direction: normal, alternate;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 94%;
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    border-color: white;
+  }
+  50% {
+    border-color: transparent;
+  }
+}
+
+.main-ctn .button {
+  background: #bb0b83;
+  color: white;
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.4s ease;
+  animation: pulse 1s infinite; /* Aplica la animación de pulso */
+}
+.main-ctn .button:hover {
+  transform: scale(1.05); /* Aumenta el tamaño al pasar el mouse */
+  animation: onclick 0.5s step-end; /* Efecto de clic */
+  color: #000;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.foto-container .img-perfil {
+  width: max-content;
+  height: 30rem;
+  border-radius: 8px;
+  transition: transform 0.5s;
+  display: flex;
+  margin: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+  align-items: end;
+  transition: transform 0.4s ease-in-out; /* Suaviza el efecto */
+}
+
+.foto-container .img-perfil:hover {
+  transform: translateY(-10px) scale(1.02); /* Aumenta el tamaño al pasar el mouse */
+  box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.2); /* Aumenta la sombra al pasar el mouse */
+}
+
+/* ===============================================================================
+--- My Projects - Grid-container - Project-card *3 (img-top - card-content) ---
+================================================================================== */
+
+.misproyectos-margin-large .projects-header  h2{
+  text-align: center;
+  font-size: 2rem;
+  color: #fff;
+  margin: 5rem 0 3rem;
+}
+
+
+.project-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 285px;
+  height: 265px;
+
+  transition: transform 0.4s ease;
+}
+.project-card:hover {
+  transform: scale(1.05); /* Aumenta el tamaño al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+ 
+.project-card .description {
+  color: black;
+  margin:2.2em 0;
+}
+
+.project-card a {
+  color:#0443ff;
+  font-weight: bold;
+  margin:0em 0;
+}
+
+.img-top {
+  display: block;
+  max-width: 100%;
+  height: 10rem;
+  width: 100%;
+  object-fit:cover;
+  border-radius: 10px;
+  margin:0em 0;
+  position: relative;
+}
+
+.enlaces {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* =============================
+--- Contacto - formulario  ---
+================================ */
+
+.contacto {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+  min-height: 53vh;        /* Ajusta la altura mínima según tu diseño */
+  margin-top: 1rem;        /* Espacio superior opcional */
+}
+
+.contacto .formulario {
+  max-width: 600px;
+  min-width: 550px;
+  max-height: 90vh;
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+}
+.contacto .formulario .titulo-caja {
+  text-decoration: none;
+  color: black;
+  margin-left: 6px;
+}
+
+.contacto .formulario .input {
+  display: block;
+  width: 32rem;
+  height: 35px;
+  margin-bottom: 0rem;
+  padding-left: 12px;
+  
+}
+
+.contacto .formulario .input-mensaje {
+  display: block;
+  width: 32rem;
+  height: 50px;
+  max-height: 80px;
+  min-height: 50px;
+  max-width:32rem;
+  margin-bottom: 0rem;
+  padding-left: 12px;
+  resize:vertical;
+  text-align: left;
+  align-content: center;
+}
+
+
+.contacto .btn-submit {
+  background-color: #bb0b83;
+  color: #fff;
+  padding: 0.65rem 1.0rem;
+  border-radius: 10%;
+  cursor: pointer;
+  border: none;
+  margin: 0.3rem 0rem;
+  transition: transform 0.4s ease;
+  animation: pulse 1s infinite; /* Aplica la animación de pulso */ 
+}
+
+
+.contacto .btn-submit:hover {
+  transform: scale(1.05); /* Aumenta el tamaño al pasar el mouse */
+  animation: onclick 0.5s step-end; /* Efecto de clic */
+  color: #000;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* =====================
+     --- Footer ---
+====================== */
+
+.footer-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-top: 1px solid #ccc; /* Ancho, estilo y color de la línea superior */
+}
+
+.footer-section .footer-text1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-top: 1rem;
+}
+
+.footer-section .footer-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #fff;
+  margin-top: 1rem;
+}
+
+.redessociales {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  margin-block-end: 2rem;
+  color:#bb0b83
+}
+
+.redessociales a {
+  text-align: center;
+  color: rgb(10,165,165);
+}

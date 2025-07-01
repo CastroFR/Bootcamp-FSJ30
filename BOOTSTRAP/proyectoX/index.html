@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto X</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container">
+                <a class="navbar-brand text-danger fw-bold" href="#">Eirbianbi</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Explorar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Iniciar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mt-3">
+        <form class="bg-white row shadow-lg rounded p-3">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                <input class="form-control" type="text" placeholder="Destino" aria-label="input destino">
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                <input class="form-control" type="date" aria-label="default input example">
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                <input class="form-control" type="date" aria-label="default input example">
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                <input class="form-control" type="text" placeholder="Huespedes" aria-label="default input example">
+            </div>
+
+            <div class="text-end">
+                <button class="btn btn-danger">Buscar</button>
+            </div>
+        </form>
+
+    </main>
+
+    <!-- Cards -->
+    <section class="container">
+        <article class="row mt-3 mb-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                <div class="card h-100">
+                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/24/ad/f9/6c/palo-verde.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Casa en la playa - Surf City</h5>
+                        <p class="card-text">$325 USD / noche</p>
+                        <p class="card-text"><small class="text-secondary">4.5 ★</small></p>
+                        <a href="#" class="btn btn-primary">Alquilar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                <div class="card h-100">
+                    <img src="https://i0.wp.com/foodandpleasure.com/wp-content/uploads/2020/10/65345792-h1-facb_angular_pool_view_300dpi.jpg?fit=2800%2C1867&ssl=1"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Hotel Xcaret – Riviera Maya</h5>
+                        <p class="card-text">$580 USD / noche</p>
+                        <p class="card-text"><small class="text-secondary">5.0 ★</small></p>
+                        <a href="#" class="btn btn-primary">Alquilar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                <div class="card h-100">
+                    <img src="https://images.trvl-media.com/lodging/2000000/1200000/1190600/1190502/90c66a5a.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Sofitel Legend, Cartagena</h5>
+                        <p class="card-text">$825 USD / noche</p>
+                        <p class="card-text"><small class="text-secondary">4.9 ★</small></p>
+                        <a href="#" class="btn btn-primary">Alquilar</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-light pt-4">
+        <div class="container">
+            <section class="row">
+                <article class="col-lg-4 col-md-4 col-sm-12">
+                    <h5>Asistencia</h5>
+                    <ul class="list-unstyled"> <!--Saca los circulos de la lista -->
+                        <li><a href="#">Centro de ayuda</a></li>
+                        <li><a href="#">Antidiscriminación</a></li>
+                        <li><a href="#">Apoyo para discapacitados</a></li>
+                        <li><a href="#">Opciones de cancelación</a></li>
+                        <li><a href="#">Problemas en la zona</a></li>
+                    </ul>
+
+                </article>
+
+                <article class="col-lg-4 col-md-4 col-sm-12">
+                    <h5>Compañia</h5>
+                    <ul class="list-unstyled"> <!--Saca los circulos de la lista -->
+                        <li><a href="#">Acerca de nosotros</a></li>
+                        <li><a href="#">Prensa</a></li>
+                        <li><a href="#">Empleo</a></li>
+                        <li><a href="#">Inversores</a></li>
+                    </ul>
+
+                </article>
+
+                <article class="col-lg-4 col-md-4 col-sm-12">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled"> <!--Saca los circulos de la lista -->
+                        <li><a href="#">Privacidad</a></li>
+                        <li><a href="#">Terminos</a></li>
+                        <li><a href="#">Mapa del sitio</a></li>
+                    </ul>
+
+                </article>
+
+            </section>
+            <hr>
+            <section class="row">
+                <article class="text-center small pb-3">
+                    <p>© 2025 Eirbianbi, Inc</p>
+                    <p>
+                        <a href="#">Español</a> |
+                        <a href="#">USD</a> |
+                        <a href="#"><i class="bi bi-facebook"></i></a> |
+                        <a href="#"><i class="bi bi-instagram"></i></a> |
+                        <a href="#"><i class="bi bi-twitter-x"></i></a> |
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                    </p>
+                </article>
+            </section>
+
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

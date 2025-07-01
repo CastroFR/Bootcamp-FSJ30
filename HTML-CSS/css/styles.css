@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* =====================
+--- Base ---
+====================== */
+:root {
+    --primary-color: #f56004;
+}
+
+html{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: gray !important;
+    background-image: url(../images/background-adare-restaurant.jpg);
+    background-size: cover;
+}
+
+.container{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+    text-align: center;
+}
+
+/*-- HEADER --*/
+.container .header{
+    height: 20vh;
+}
+
+/*-- Img Logo --*/
+
+.container .header .img-container{
+   height: 12vh;
+   display: flex;
+   justify-content: center;
+}
+
+.container .header .img-container .img-logo{
+    height: 10vh;
+}
+
+/* --- Navbar ---*/
+
+.container .header .navbar{
+    display: flex;
+    justify-content: space-between;
+    width: 40vw;
+    margin: 0 auto;
+}
+
+.container .header .navbar .nav-item{
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.container .header .navbar .nav-item:hover {
+    /* Utilizacion de keyframe 
+    animation: navItemHover 0.3s forwards ; */
+    color:var(--primary-color);
+    font-size: 1.4em;
+    text-decoration: underline;
+}
+/*
+@keyframes navItemHover {
+    to {
+        color:var(--primary-color);
+        font-size: 1.4em;
+        text-decoration: underline;
+    }
+}
+*/
+
+/* --- Main Content ---*/
+
+
+.container .main-container{
+    margin-top: 5vh;
+}
+
+.container .main-container .main-text-container{
+    color: white;
+    padding: 2rem;
+}
+
+.container .main-container .main-text{
+    font-family: "Edu NSW ACT Hand Pre", cursive;
+    font-size: 3.5em;
+    transition: all 0.3s;
+}
+
+.container .main-container .main-text:hover{
+    text-shadow: 0.05em 0.05em var(--primary-color);
+}
+
+.container .main-container .main-text-container article {
+    margin: 0 auto;
+    max-width: 40vw;
+}
+
+.container .main-container .main-text-container article p {
+    color: rgb(156, 155, 155);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.1em;
+}
+
+.container .main-container .main-text-container article p strong a {
+    text-decoration: none;
+    color: white;
+    text-shadow: 0.1em 0.1em #f56004;
+}
+
+/* =====================
+--- Main Content MAPS ---
+====================== */
+
+.container .main-container .maps-container .maps {
+    height: 50vh;
+    width: 60vw;
+}
+
+/* --- Footer ---*/
+
+.container .footer {
+    color: white;
+}
+
+.container .footer h4 {
+    font-size: 1.1em;
+}

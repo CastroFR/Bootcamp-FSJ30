@@ -112,3 +112,29 @@ funcioncita();
 // Funcion preferible mas utilizada, debemos utilizar esta!!!!!!!!
 const functionFlecha = () => { console.log("Hola desde una función flecha");}
 functionFlecha();
+
+
+//***************************************************************************** */
+// 
+// Callback => es una funcion que se pasa coo parametro a otra
+
+function saludar(){
+    console.log("Hola, este es un saludo desde una función");
+}
+// ** Función que recibe un callback
+function funcionQueUsaCallback(callbackfn){
+    let nombre = callbackfn(); // Llamamos al callback y guardamos el resultado en la variable nombre
+    
+    console.log("Esta es una función que recibe un callback " +nombre);
+}
+
+/*
+** FUNCION QUE USA CALLBACK
+** NECESITA QUE LE RETORNES UN NOMBRE
+*/
+
+funcionQueUsaCallback( () => { 
+    // Esta es una función anónima que retorna un nombre
+    return "Kevin"
+})
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concesionario El Salvador</title>
+</head>
+<body>
+    <h1>Bienvenido a Concesionara El Salvador SA de CV</h1>
+    <h2>Donde encuentras el auto de tus sueños</h2>
+    <p>Autos Disponibles:</p>
+    <ul>
+        <li>1 - FORD FIESTA</li>
+        <li>2 - FORD FOCUS</li>
+        <li>3 - FORD ESCAPE</li>
+    </ul>
+
+    <button onclick="cotizarAuto()">Cotizar Auto</button>
+    <div id="descuentoFinal"></div>
+
+    <script src="./ejercicio5.js"></script>
+    <script>
+        function cotizarAuto(){
+            let seleccion = prompt("A continuacion, ingrese el numero del auto que desea cotizar: ");
+            seleccion = Number(seleccion);
+            concesionarioSV("", seleccion);
+        }
+    </script>
+</body>
+</html>

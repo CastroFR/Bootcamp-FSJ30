@@ -14,6 +14,10 @@ let cursosCarrito = [];
 
 function vaciarCarrito(evento) {
     console.log("Soy el vaciar carrito");
+
+    // aqui vaciamos 2 cosas el innerhtml y el string
+    cursosCarrito = [];
+    contenedorCarrito.innerHTML = "";
 }
 
 function agregarCurso(evento) {
@@ -23,7 +27,36 @@ function agregarCurso(evento) {
 
     let curso = leerDatosCurso(evento.target.parentElement.parentElement);
     console.log(curso);
-    cursosCarrito.push(curso); // esta accion se estaria enviando al servidor
+
+    // validar que el curso exista para poder agregarlo y guardarlo, evitando duplicados
+    // metodo => some => para recorrer el array y devolver true o false
+    const existe = cursosCarrito.some( (cursoArr) => cursoArr.id == curso.id)
+
+    if(existe){
+        cursosCarrito.map( (cursoArr) => {
+            if(cursoArr.id === curso.id){
+                cursoArr.cantidad += 1;
+                //cantidad++
+                // Aumentar precio al seleccionar productos
+                // Utilizar un metodo de string que pueda quitar el primer caracter
+                // Metodos posibles serian => Substring o Slice
+                cursoArr.precio = cursoArr.precio.substring(1);
+                // Transformamos el string a entero
+                // parseInt o parseFloat
+                cursoArr.precio = parseFloat(cursoArr.precio);
+
+                // Aumentamos el precio
+                cursoArr.precio += cursoArr.precio;
+
+                // Devolvemos el precio a su formato original
+                cursoArr.precio = `$${cursoArr.precio}`;
+                
+                return cursoArr;
+            }
+        })
+    }else{
+        cursosCarrito.push(curso); // esta accion se estaria enviando al servidor
+    }
     console.log(cursosCarrito);
 
     // aca llamamos la funcion para que lea los cambios
@@ -49,7 +82,6 @@ function leerDatosCurso(curso) {
         precio: curso.querySelector('h5').textContent,
         cantidad: 1
     }
-
     return infoCurso;
 }
 
@@ -57,9 +89,9 @@ function pintarCarritoHTML() {
     //contenedorCarrito.innerHTML = "<h1>hola</h1>"
 
     //Limpiar el html del carrito antes de mapear los datos
-    contenedorCarrito.innerHTML = ""
+    contenedorCarrito.innerHTML = "";
 
-    cursosCarrito.map((curso) => {
+    cursosCarrito.map( (curso) => {
 
         // creamos una fila
         let fila = document.createElement('tr');
@@ -71,11 +103,50 @@ function pintarCarritoHTML() {
         <td>${curso.nombre}</td>
         <td>${curso.precio}</td>
         <td>${curso.cantidad}</td>
-        <td><a class="btn btn-danger">Eliminar</a></td>
+        <td><a class="btn btn-danger" onclick="eliminarCurso(${curso.id})">Eliminar</a></td>
         `
 
         contenedorCarrito.appendChild(fila);
     })
 
 }
+
+function eliminarCurso(id){
+    console.log(id);
+    
+cursosCarrito.map( (curso) => {
+    console.log(curso.id);
+    //console.log("Soy la cantidad" + curso.cantidad);
+
+    // PROBLEMA => ELIMINA TOTALMENTE EL ID DEL CURSO, Y NO DESCUENTA SI HAY MAS DE 1
+    // SOLUCION =>
+
+    // Si tiene cantidad mayor a 1, tiene que ir descontando de 1 en 1
+/*
+    if (cantidad.id != curso.id > 1) {
+       console.log(curso.id);
+
+       cursosCarrito.splice( cantidad => curso.id != id)
+        
+    }
+*/
+   /*  if(cursoArr != curso.cantidad){
+        console.log(curso.cantidad);
+        cursosCarrito = cursosCarrito.filter( curso => curso.cantidad != cursoArr)
+    } */
+    
+
+    if(curso.id == id){
+        console.log(curso.id);
+        // Va guardar los cursos que sean diferentes a ese ID
+        cursosCarrito = cursosCarrito.filter( curso => curso.id != id) 
+        /* **********Solucion al problema de que no elimina cursos*********
+        // SOLUCION
+        // cursosCarrito solo guardaba los ID diferentes pero no los almacenaba como tal
+        // entonces se agrega cursosCarrito = cursosCarrito para ue guarde los ID y listo
+        */
+    }
+})
+
 pintarCarritoHTML();
+}

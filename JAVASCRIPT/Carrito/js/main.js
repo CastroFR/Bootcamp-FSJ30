@@ -32,6 +32,9 @@ function agregarCurso(evento) {
     // metodo => some => para recorrer el array y devolver true o false
     const existe = cursosCarrito.some( (cursoArr) => cursoArr.id == curso.id)
 
+    const totalPrecio = cursosCarrito.reduce( (cursoArr) => cursoArr + (cursoArr.precio * cursoArr.cantidad), 0);
+console.log("Total precio" + totalPrecio);
+
     if(existe){
         cursosCarrito.map( (cursoArr) => {
             if(cursoArr.id === curso.id){
@@ -40,6 +43,8 @@ function agregarCurso(evento) {
                 // Aumentar precio al seleccionar productos
                 // Utilizar un metodo de string que pueda quitar el primer caracter
                 // Metodos posibles serian => Substring o Slice
+
+                
                 cursoArr.precio = cursoArr.precio.substring(1);
                 // Transformamos el string a entero
                 // parseInt o parseFloat
@@ -59,10 +64,13 @@ function agregarCurso(evento) {
     }
     console.log(cursosCarrito);
 
+    
+
     // aca llamamos la funcion para que lea los cambios
     pintarCarritoHTML();
 
 }
+
 
 // Creamos otra funcion para poder ir extrayendo datos deseados,
 // en este caso comenzando con la imagen.
@@ -120,21 +128,27 @@ cursosCarrito.map( (curso) => {
 
     // PROBLEMA => ELIMINA TOTALMENTE EL ID DEL CURSO, Y NO DESCUENTA SI HAY MAS DE 1
     // SOLUCION =>
+        // Si la cantidad es mayor a 1, entonces descontamos 1 a la cantidad
+    // Si la cantidad es 1, entonces eliminamos el curso
 
     // Si tiene cantidad mayor a 1, tiene que ir descontando de 1 en 1
-/*
-    if (cantidad.id != curso.id > 1) {
-       console.log(curso.id);
-
-       cursosCarrito.splice( cantidad => curso.id != id)
-        
+    if(curso.cantidad > 1){
+        console.log("Soy la cantidad mayor a 1");
+        // Descontamos 1 a la cantidad
+        curso.cantidad -= 1;
+        // Descontamos el precio
+        curso.precio = curso.precio.substring(1);
+        // Transformamos el string a entero
+        curso.precio = parseFloat(curso.precio);
+        // Descontamos el precio
+        curso.precio -= curso.precio;
+        // Devolvemos el precio a su formato original
+        curso.precio = `$${curso.precio}`;
+        console.log("Soy la cantidad mayor a " + curso.cantidad);
+        return curso;
     }
-*/
-   /*  if(cursoArr != curso.cantidad){
-        console.log(curso.cantidad);
-        cursosCarrito = cursosCarrito.filter( curso => curso.cantidad != cursoArr)
-    } */
-    
+
+
 
     if(curso.id == id){
         console.log(curso.id);

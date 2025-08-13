@@ -6,12 +6,18 @@ function App() {
 
   return (
     <> {/* Este es el fragment -> NO DIBUJA UN CONTENEDOR EN EL HTML */}
+
+    
       <h1>Holiwis</h1>
 
       {/* Esto es el primer componente jaja saludos */}
-      <Saludo nombre='Kevin'/>
-      <Saludo nombre='Linett'/>
-      <Saludo nombre='Kiko'/>
+      <Saludo
+      nombre="Kevin"
+      apellido="Castro"
+      />
+      <Saludo nombre='Kevin' apellido="Castro"/>
+      <Saludo nombre='Linett' apellido="Rodriguez"/>
+      <Saludo nombre='Kiko' apellido="Escoba"/>
     </>
   )
 }

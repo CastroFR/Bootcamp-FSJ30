@@ -16,11 +16,11 @@ import { Chauchis } from "./Chauchis";
 
 export default Saludo; */
 
-function Saludo({nombre, apellido}) {
+function Saludo({nombre, apellido}) { // PROPS
 //function Saludo({props}) {
 //  console.log(props);
   
-  /* Destructuring object
+  /* Destructuring object  => Nosotros podemos crear variables o const extrayendo el valor de un objeto en su propiedad
   props = {
   nombre: "Kevin",
   apellido: "Castro"
@@ -33,7 +33,7 @@ function Saludo({nombre, apellido}) {
   // El remplazo de las variables para manipular datos en REACT
   // El estado -> Hook -> Son funciones PREHECHAS que ya vienen con React
 //  const [nombreEstado, setNombreEstado] = useState();
-  const [nombreCurso, setNombreCurso] = useState("FSJ30");
+  const [nombreCurso, setNombreCurso] = useState("FSJ30"); // ESTADOS
 
   //console.log(nombreCurso);
   

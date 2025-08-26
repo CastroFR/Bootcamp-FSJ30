@@ -1,8 +1,16 @@
 
-export const CardCharacter = ({name,image,status}) => {
+export const CardCharacter = ({id,name,image,status,listFavorites,changeFavorites}) => {
 
+/* Parte lógica para poder utilizar la lista de favoritos */
 
-
+const handleAddToFavorites = () => {
+    // logica para guardar en favoritos
+    console.log({id,name,image,status});
+    // Propagación de datos
+    changeFavorites({id,name,image,status})
+    console.log(listFavorites);
+    
+}
     return (
         <div>
             <div className="card" style={{height: '28rem'}}>
@@ -10,7 +18,7 @@ export const CardCharacter = ({name,image,status}) => {
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
                         <p className="card-text">{status}</p>
-                        <button className='btn btn-primary'>Add to Favorities</button>
+                        <button className="btn btn-primary" onClick={handleAddToFavorites}>Add to Favorities</button>
                     </div>
             </div>
         </div>

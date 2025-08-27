@@ -1,7 +1,7 @@
 // rafc -> snippet para crear el componente funcional con flecha
 import { useContext, useEffect, useState } from "react";
-import { CardCharacter } from "./CardCharacter";
-import { FavoritesContext } from "../contexts/FavoritesContext";
+import { CardCharacter } from "../../components/CardCharacter";
+import { FavoritesContext } from "../../contexts/FavoritesContext";
 
 /*
 1- https://rickandmortyapi.com/api/character

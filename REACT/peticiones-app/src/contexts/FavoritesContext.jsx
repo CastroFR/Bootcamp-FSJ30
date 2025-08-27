@@ -1,10 +1,10 @@
 /* Vamos a declarar 2 cosas a la vez */
 
 import { createContext, useState } from "react";
-import { ListCharacters } from "../components/ListCharacters";
 
 // De este FavoritesContext sacaremos la informacion posteriormente
-export const FavoritesContext = createContext(); // Crear el contexto
+// Crear el contexto
+export const FavoritesContext = createContext(); 
 
 // Proveedor de la información del contexto
 // Wrapper -> Contiene otros componentes -> {children}

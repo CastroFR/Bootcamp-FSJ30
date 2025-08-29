@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Indicamos que no se suba la carpeta repositories del src
+src/repositories 

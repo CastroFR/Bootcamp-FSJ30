@@ -1,12 +1,25 @@
 // rafc
+import { useState } from 'react';
+import { LoginComponent } from './components/LoginComponent';
 import { RegisterComponent } from './components/RegisterComponent';
 
 export const SessionView = () => {
+  const [vistaComponent, setvistaComponent] = useState('login');
+
   return (
     <div>
-      Session
-      <RegisterComponent />
+      <h2>Session</h2>
+      <button className='btn btn-danger ms-2' onClick={() => setvistaComponent('login')}>Iniciar Sesion</button>
+      <button className='btn btn-primary ms-2' onClick={() => setvistaComponent('register')}>Registrarse</button>
+      <div style={{ marginTop: 15 }}>
+        {vistaComponent === 'login' && <LoginComponent />}
+        {vistaComponent === 'register' && <RegisterComponent />}
+      </div>
     </div>
   )
 }
 
+// RETO RESUELTO
+// Mostrar por medio de un boton, el componente que corresponda. Y no los dos a la vez.
+// tanto para LoginComponent como RegisterComponent.
+// ********** SessionView.jsx **********

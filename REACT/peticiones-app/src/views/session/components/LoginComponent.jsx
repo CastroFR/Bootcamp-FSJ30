@@ -34,16 +34,23 @@ export const LoginComponent = () => {
     }
 
     return (
-        <section>LoginComponent
-            <form onSubmit={handleSubmit(onSubmitForm)}>
-                <label className="form-label">Email: </label>
-                <input type="email" className="form-control" name="input_email" {...register('email')} />
-                <p className="text-danger">{errors.email && errors.email.message}</p>
-                <label className="form-label">Password: </label>
-                <input type="password" className="form-control" name="input_password" {...register('password')} />
-                <p className="text-danger">{errors.password && errors.password.message}</p>
-                <button type="submit">Send</button>
-            </form>
+        <section className="row justify-content-center">
+            <div className="col-6">
+                <div className="card">
+                    <div className="card-body">
+                        <h3 className="card-title text-center">Sign in</h3>
+                        <form onSubmit={handleSubmit(onSubmitForm)}>
+                            <label className="form-label" >Email: </label>
+                            <input type="email" className="form-control" name="input_email" {...register('email')} />
+                            <p className='text-danger'>{errors.email && errors.email.message}</p>
+                            <label className="form-label">Password: </label>
+                            <input type="password" className="form-control" name="input_password" {...register('password')} />
+                            <p className='text-danger'>{errors.password && errors.password.message}</p>
+                            <button type="submit" className="btn btn-primary">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
     )
 }

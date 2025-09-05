@@ -23,4 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-src/repositories 
+# Firebase config
+/src/repositories/
+/src/repositories/*
+src/repositories/firebase/config.js

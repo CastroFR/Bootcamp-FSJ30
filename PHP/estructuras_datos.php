@@ -1,129 +1,120 @@
-<?php
-//Diferencias vs Javascript
-// 1. PHP es un lenguaje compilado (se interpreta por apache)
-// 2. PHP es un lenguaje de tipado debil pero con tipado obligatorio
-// 3. PHP no es case sensitive (no distingue entre mayusculas y minusculas) en variables y funciones
-// 4. PHP vamos a utilizar una POO con todos los pilares
-// Delimitadores
+<?php 
 
-/* Comentario
-multilinea */
+//Arrays
+//Declaracion
+//Array indexados
+$array = [1,2,3,4,5];
+$array2 = array();
+$array3 = new ArrayObject();
 
-// Salto de linea \n
-// La concatenacion va a ser con el punto .
-echo "Holiwiis"."\n";
-print "Holiwiis con print \n";
-echo "Chauchis"."\n";
+//Array asociativos
+$arrayAsociativo = [
+    "nombre" => "Jairo",
+    "edad" => 30,
+    "departamento" => "La libertad"
+];
 
-//Variables
-//let nombre = "Jairo"
+print_r($arrayAsociativo["nombre"] . "\n");
 
-$nombre = "Jairo";
+//Array propiedades y metodos
 
-//Constantes
-define("PI", 3.1416);
+//Saber el largo del array
+print count($array)."\n";
 
+//Agregar un elemento al final del array
+array_push($array, 6);
+$array[] = 7;
 
-//Template string
-$templateString = "Hola, mi nombre es {$nombre}";
-echo $templateString . "\n";
+//Agregar un elemento al inicio del array
+array_unshift($array, 0);
 
-//Operadores matematicos
-$suma = 2 + 2;
-$resta = 2 - 2;
-$multiplicacion = 2 * 2;
-$division = 2 / 2;
-$modulo = 5 % 2; //Resto de la division
-$exponente = 2 ** 3; //2^3
+print_r($array);
 
-//Operadores de comparacion
-$igual = (2 == 2);
-$igualdadEstricta = (2 === "2");
-$diferente = (2 != 3);
-$diferenteEstricta = (2 !== "2");
-$mayor = (2 > 1);
-$menor = (2 < 3);
-$mayor_igual = (2 >= 2);
-$menor_igual = (2 <= 3);
+//Eliminar el ultimo elemento del array
+array_pop($array);
+print_r($array);
 
-//Operadores logicos AND (&&), OR (||), NOT (!)
-$y = (2>3 && 3<=2);
-$o = (3>5 || 2<5);
-$no = !true;
+//Eliminar el primer elemento del array
+array_shift($array);
+print_r($array);
 
-
-//Funciones
-//Funcion expresada
-function saludar($nombre) {
-    return "Hola, {$nombre}";
+//Recorrer un array
+foreach($array as $valor){
+    echo "Valor: {$valor}\n";
 }
 
-echo saludar("Jose")."\n";
+//Arrays multidimensionales
+$arrayMultimensional = [
+    "nombre" => "Jairo",
+    "edad" => 30,
+    "hobbies" => ["Programar", "Leer", "Correr", "otros" => [ "Jugar jueguitos" => ["LOL","DOTA2","CS2"]]]
 
-//Funciones anonimas 
-$despedirse = function($nombre){
-    return "Chauchis, {$nombre}";
-};
+];
 
-echo $despedirse("Jose")."\n"; 
-
-//Funciones flecha (PHP 7.4+)
-$gritar = fn($nombre) => "AAAAHHH, {$nombre}";
-
-echo $gritar("Jairo")."\n";
+print_r($arrayMultimensional);
 
 
-// Estructuras condicionales
-// IF ELSEIF ELSE
-$edad = 18;
-if($edad < 18){
-    echo "Eres menor de edad\n";
-} elseif($edad === 18){
-    echo "Tienes 18 años\n";
-} else {
-    echo "Eres mayor de edad\n";
+//Clases y objetos 
+
+class Persona {
+    //Atributos o propiedades
+    private $nombre;
+    private $edad;
+
+    //constructor
+    function __construct($nombreParam, $edadParam){
+        $this->nombre = $nombreParam;
+        $this->edad = $edadParam;
+    }
+
+    //Metodos o funciones
+    public function getNombre() {
+        return $this->nombre;
+    }
+
+    public function getEdad() {
+        return $this->edad;
+    }
+
+    /**
+     * Set the value of nombre
+     * @param string $nombre
+     * @return  self
+     */ 
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of edad
+     * @param int $edad
+     * @return  self
+     */ 
+    public function setEdad($edad)
+    {
+        $this->edad = $edad;
+
+        return $this;
+    }
+
+    
+
+	
 }
 
-// SWITCH case
-$dia = 3;
-switch($dia){
-    case 1:
-        echo "Lunes\n";
-        break;
-    case 2:
-        echo "Martes\n";
-        break;
-    case 3:
-        echo "Miercoles\n";
-        break;
-    default:
-    echo "Es un otro dia que no tenemos clases \n";
-    break;
-}   
+//Crear un objeto
+$persona1 = new Persona("Jairo", 30);
 
-//Ternario
-$mensaje = ($edad < 18) ? "Eres menor de edad" : "Eres mayor de edad";
-echo $mensaje."\n";
+//Acceder a los metodos del objeto
+echo $persona1->getNombre() . "\n";
 
 
-//Estructuras repetitivas
-// While
-$contador = 0;
+//LIFO -> Stack -> Last In First Out
 
-while($contador < 5){
-    echo "Contador: {$contador}\n";
-    $contador++;
-}
 
-// Do while
-$contador = 0;
-do{
-    echo "Contador do while: {$contador}\n";
-    $contador++;
-} while($contador < 5);
+//FIFO -> Queue -> First In First Out
 
-// For
-for($i = 0; $i < 5; $i++){
-    echo "Contador for: {$i}\n";
-}
 ?>

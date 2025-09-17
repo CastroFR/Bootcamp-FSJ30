@@ -65,7 +65,7 @@ $despedirse = function($nombre){
     return "Chauchis, {$nombre}";
 };
 
-echo $despedirse("Jose")."\n";
+echo $despedirse("Jose")."\n"; 
 
 //Funciones flecha (PHP 7.4+)
 $gritar = fn($nombre) => "AAAAHHH, {$nombre}";
@@ -105,4 +105,25 @@ switch($dia){
 $mensaje = ($edad < 18) ? "Eres menor de edad" : "Eres mayor de edad";
 echo $mensaje."\n";
 
+
+//Estructuras repetitivas
+// While
+$contador = 0;
+
+while($contador < 5){
+    echo "Contador: {$contador}\n";
+    $contador++;
+}
+
+// Do while
+$contador = 0;
+do{
+    echo "Contador do while: {$contador}\n";
+    $contador++;
+} while($contador < 5);
+
+// For
+for($i = 0; $i < 5; $i++){
+    echo "Contador for: {$i}\n";
+}
 ?>

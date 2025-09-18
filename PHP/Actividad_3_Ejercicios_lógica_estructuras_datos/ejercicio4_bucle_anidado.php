@@ -17,4 +17,32 @@ for ($i = 1; $i <= $altura; $i++) {
     // Nueva línea después de cada fila
     echo "\n";
 }
+
+
+// **************************
+// Forma vista en clase =>
+
+function imprimirPiramide(){
+
+    $filas = 5;
+
+    //1er bucle es para la ALTURA
+    // Por eso empieza en 1 y se repite hasta la cantidad de altura que queremos que tenga
+    for ($i = 1; $i <= $filas; $i++){
+        // 2do bucle controla los espacios en blanco antes de dibujar los astericos
+        for($espacios = 1; $espacios <= $filas - $i; $espacios++){
+            echo " ";
+        }
+
+        // 3er bucle controlar los asteriscos por fila
+        // formula para saber cuantos asteriscos necesitamos es (2 * $i - 1)
+
+        for($asteriscos = 1; $asteriscos <= (2 * $i - 1); $asteriscos++ ){
+            echo "*";
+        }
+        echo "\n";
+    }
+}
+imprimirPiramide();
+
 ?>

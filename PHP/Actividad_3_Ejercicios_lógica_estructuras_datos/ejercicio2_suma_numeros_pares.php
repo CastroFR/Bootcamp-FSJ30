@@ -17,4 +17,23 @@ function sumarNumerosPares($numeros) {
 $numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 $resultado = sumarNumerosPares($numeros);
 echo "La suma de los números pares es: " . $resultado;
+
+
+// **************************
+// Forma vista en clase =>
+
+function sumarParesArray($array){
+    $total = 0;
+
+    foreach($array as $numero){
+
+        //Si tenemos numeros PARES
+        if($numero % 2 === 0){
+            $total += $numero;
+        }
+    }
+    return $total;
+}
+
+
 ?>

@@ -15,4 +15,18 @@ $numeros = array(1, 2, 3, 4, 5);
 $listaInvertida = invertirLista($numeros);
 print_r($listaInvertida);
 
+// **************************
+// Forma vista en clase =>
+
+function invertirLista2($array){
+    $arrayNuevo = [];
+    for($i = count($array) - 1; $i >= 0; $i--){
+        $arrayNuevo[] = $array[$i];
+    }
+    return $arrayNuevo;
+}
+$numerosPrueba = [1,2,3,4,5];
+$resultado = invertirLista2($numerosPrueba);
+print_r($resultado);
+
 ?>

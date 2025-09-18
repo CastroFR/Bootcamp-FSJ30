@@ -26,4 +26,31 @@ function frecuenciaCaracteres($cadena) {
 $cadena = "hola mundo";
 $resultado = frecuenciaCaracteres($cadena);
 print_r($resultado);
+
+
+// **************************
+// Forma vista en clase =>
+
+function contarFrecuenciaCaracteres($StringParam){
+    $frecuenciaCaracter = [];
+
+    // Cortar el string en Caracteres -> str_split
+
+    $caracteres = str_split($StringParam);
+    //print_r($caracteres);
+
+    foreach($caracteres as $caracter){
+        // isset() -> DETERMINA UN VALOR EXISTE, SI ESO PASA NOS DA UN "TRUE"
+        if(isset($frecuenciaCaracter[$caracter])){
+            $frecuenciaCaracter[$caracter]++;
+        }else{
+            $frecuenciaCaracter[$caracter] = 1;
+        }
+    }
+    return $frecuenciaCaracter;
+}
+
+print_r(contarFrecuenciaCaracteres("Holaa como estamos"));
+
+
 ?>

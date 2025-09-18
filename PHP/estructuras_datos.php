@@ -114,7 +114,100 @@ echo $persona1->getNombre() . "\n";
 
 //LIFO -> Stack -> Last In First Out
 
+class Stack {
+    private $data;
+
+    //Constructor con parametros OPCIONALES
+    function __construct($dataParams = []){
+        $this->data = $dataParams;
+    }
+
+    //Agregar un elemento
+    function add($element){
+        array_push($this->data, $element);
+        //$this->data[] = $element;
+    }
+
+    //Eliminar un elemento
+    function remove(){
+        return array_pop($this->data);
+    }
+}
+
+$stacito = new Stack([1,2,3,4]);
+
 
 //FIFO -> Queue -> First In First Out
 
+class Queue{
+    private $data;
+
+    function __construct($dataParams = []){
+        $this->data = $dataParams;
+    }
+
+    //Agregar un elemento
+    function add($element){
+        array_push($this->data, $element);
+    }
+
+    //Eliminar un elemento
+    function remove(){
+        return array_shift($this->data);
+    }
+}
+
+class Node{
+    private $value;
+    private $next;
+
+    function __construct($valueParam){
+        $this->value = $valueParam;
+        $this->next = null;
+    }
+
+    public function getValue() {
+        return $this->value;
+    }
+
+    public function getNext() {
+        return $this->next;
+    }
+
+    public function setNext($next) {
+        $this->next = $next;
+    }
+}
+
+class LinkedList{
+    private $head;
+
+    function __construct(){
+        $this->head = null;
+    }
+
+    function add($value){
+        //Creamos un nuevo nodo
+        $newNode = new Node($value);
+
+        if($this->head === null){
+            $this->head = $newNode;
+        }else{
+            $current = $this->head;
+
+            //Recorremos la lista mientras el siguiente no sea nulo
+            while($current->getNext() !== null){
+                $current = $current->getNext();
+            }
+            //Cuando encontramos el final, agregamos el nuevo nodo
+            $current->setNext($newNode);
+        }
+    }
+}
+
+$listita = new LinkedList();
+$listita->add(3);
+$listita->add(1);
+$listita->add(5);
+print_r($listita);
 ?>

@@ -224,16 +224,79 @@ class LinkedList
 
 
     //Funcion para encontrar un dato. Devolveria un mensaje si este dato existe
+ /**
+     * Busca un valor en la lista enlazada
+     * @param mixed $value Valor a buscar
+     * @return bool True si existe, False si no existe
+     */
+    function encontrarData($value)
+    {
+        $current = $this->head;
 
-    //Funcion para eliminar
+        // Recorremos toda la lista desde la cabeza
+        while ($current !== null) {
+            // Comparamos el valor actual con el buscado
+            if ($current->getValue() === $value) {
+                echo "El valor $value existe en la lista.\n";
+                return true;
+            }
+            // Avanzamos al siguiente nodo
+            $current = $current->getNext();
+        }
 
+        // Si recorrimos toda la lista sin encontrar el valor
+        echo "El valor $value no se encuentra en la lista.\n";
+        return false;
+    }
 
+    /**
+     * Elimina un valor de la lista enlazada
+     * @param mixed $value Valor a eliminar
+     * @return bool True si se eliminó, False si no se encontró
+     */
+    function eliminarData($value)
+    {
+        // Caso 1: Lista vacía
+        if (!$this->head) {
+            echo "Lista vacía.\n";
+            return false;
+        }
+
+        // Caso 2: El valor está en la cabeza
+        if ($this->head->getValue() === $value) {
+            $this->head = $this->head->getNext();
+            echo "Valor $value eliminado.\n";
+            return true;
+        }
+
+        $current = $this->head;
+        
+        // Buscamos el nodo anterior al que contiene el valor
+        while ($current->getNext() && $current->getNext()->getValue() !== $value) {
+            $current = $current->getNext();
+        }
+
+        // Caso 3: Valor no encontrado
+        if (!$current->getNext()) {
+            echo "Valor $value no encontrado.\n";
+            return false;
+        }
+
+        // Caso 4: Eliminar nodo intermedio o final
+        // Saltamos el nodo a eliminar enlazando con el siguiente
+        $current->setNext($current->getNext()->getNext());
+        echo "Valor $value eliminado.\n";
+        return true;
+    }
 }
 
 $listita = new LinkedList();
 $listita->add(3);
 $listita->add(1);
 $listita->add(5);
+$listita->encontrarData(1);
+$listita->eliminarData(0);
+
 print_r($listita);
 
 
@@ -325,9 +388,71 @@ class BinaryThree
     // ***************** RETO DIVIDIDO EN SALAS *****************
 
     //Funcion para encontrar un dato. Devolveria un mensaje si este dato existe
+    /**
+     * Busca un valor en el árbol binario
+     * @param int $value Valor a buscar
+     * @return bool True si existe, False si no existe
+     */
+    function encontrarDato($value)
+    {
+        $current = $this->root;
 
-    //Funcion para eliminar
-    
+        // Recorremos el árbol mientras haya nodos que revisar
+        while ($current !== null) {
+            // Si encontramos el valor, mostramos mensaje y retornamos true
+            if ($current->getValue() === $value) {
+                echo "El valor $value existe en el árbol.\n";
+                return true;
+            }
+            // Si el valor es menor, vamos a la izquierda; si es mayor, a la derecha
+            $current = $value < $current->getValue()
+                ? $current->getLeft()
+                : $current->getRight();
+        }
+
+        // Si llegamos a null, el valor no existe
+        echo "El valor $value no se encuentra en el árbol.\n";
+        return false;
+    }
+
+    /**
+     * Elimina un valor del árbol binario
+     * @param int $value Valor a eliminar
+     */
+    function eliminarDato($value)
+    {
+        $this->root = $this->_eliminar($this->root, $value);
+    }
+
+    /**
+     * Función auxiliar recursiva para eliminar un nodo
+     * @param Nodo $nodo Nodo actual en la recursión
+     * @param int $value Valor a eliminar
+     * @return Nodo|null El nodo modificado después de la eliminación
+     */
+    private function _eliminar($nodo, $value)
+    {
+        // Caso base: nodo no existe
+        if (!$nodo) {
+            echo "Valor $value no encontrado.\n";
+            return null;
+        }
+
+        // Buscar el valor en el subárbol correspondiente
+        if ($value < $nodo->getValue()) {
+            $nodo->setLeft($this->_eliminar($nodo->getLeft(), $value));
+        } elseif ($value > $nodo->getValue()) {
+            $nodo->setRight($this->_eliminar($nodo->getRight(), $value));
+        } else {
+            // Valor encontrado - proceder a eliminar
+            echo "Valor $value eliminado.\n";
+            
+            // Nodo con un hijo o sin hijos
+            if (!$nodo->getLeft()) return $nodo->getRight();
+            if (!$nodo->getRight()) return $nodo->getLeft();
+        }
+        return $nodo;
+    }
 }
 
 $nuevoNodo = new Nodo(10);
@@ -338,4 +463,7 @@ echo "\n";
 $arbolito->insert(17);
 $arbolito->insert(19);
 $arbolito->insert(13);
+$arbolito->insert(5);
+$arbolito->encontrarDato(5);
+$arbolito->eliminarDato(5);
 print_r($arbolito);

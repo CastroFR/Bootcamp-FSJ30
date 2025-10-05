@@ -4,9 +4,11 @@ class Aerolinea{
     private $nombre;
     private $cant_aviones;
     private $tipo_aerolinea;
+    private $id;
 
-    function __construct($nombreParam, $cant_avionesParam, $tipo_aerolineaParam)
+    function __construct($idParam,$nombreParam, $cant_avionesParam, $tipo_aerolineaParam)
     {
+        $this->id = $idParam;
         $this->nombre = $nombreParam;
         $this->cant_aviones = $cant_avionesParam;
         $this->tipo_aerolinea = $tipo_aerolineaParam;        
@@ -66,6 +68,14 @@ class Aerolinea{
     public function setTipo_aerolinea($tipo_aerolinea)
     {
         $this->tipo_aerolinea = $tipo_aerolinea;
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
     }
 }
 

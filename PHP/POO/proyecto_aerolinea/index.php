@@ -91,6 +91,7 @@ function obtenerAerolineaPorId($aerolinea_array, $id)
             <input type="text" name="cantidad_aviones" value="<?php echo $aerolineaEditable->getCant_aviones() ?>" required>
 
             <label for="nombre_aerolinea">Tipo de Aerolinea: </label>
+            <!-- RETO RESUELTO - Aplicar propiedad selected al tipo_aerolinea seleccionado correctamente con ternario -->
             <select type="text" name="tipo_aerolinea">
                 <option value="Privado" <?php echo ($aerolineaEditable->getTipo_aerolinea() == 'Privado') ? 'selected' : ''; ?>>Privado</option>
                 <option value="Comercial" <?php echo ($aerolineaEditable->getTipo_aerolinea() == 'Comercial') ? 'selected' : ''; ?>>Comercial</option>
@@ -98,7 +99,7 @@ function obtenerAerolineaPorId($aerolinea_array, $id)
                 <option value="Nacional" <?php echo ($aerolineaEditable->getTipo_aerolinea() == 'Nacional') ? 'selected' : ''; ?>>Nacional</option>
             </select>
             <button type="submit">Editar</button>
-
+            <!-- **************************************** -->
         </form>
 
     <?php

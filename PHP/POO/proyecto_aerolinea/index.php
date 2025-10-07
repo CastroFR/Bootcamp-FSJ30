@@ -1,5 +1,5 @@
 <?php
-print_r($_POST);
+//print_r($_POST);
 require_once './Aerolinea.php';
 
 // $_SESSION -> Variable reservada para almacenar datos (Array assoc)
@@ -7,7 +7,7 @@ require_once './Aerolinea.php';
 
 session_start();
 
-print_r($_SESSION);
+//print_r($_SESSION);
 
 //Llamamos la clase Aerolineas para crear un objeto
 // include -> Incluir el archivo y si no existe, mostrar un error y continuar la ejecucion del codigo
@@ -16,7 +16,7 @@ print_r($_SESSION);
 // include_once -> Incluir el archivo una sola vez, si se vuelve a llamar dentro de este archivo, va a usar la misma referencia
 // require_once -> Requerir el archivo una sola vez, si se vuelve a llamar dentro de este archivo, va a usar la misma referencia
 
-
+print_r($_GET);
 
 // Persistencia de datos
 // Auxiliar para prechequear session
@@ -44,9 +44,22 @@ if (isset($_POST['nombre_aerolinea'], $_POST['cantidad_aviones'], $_POST['tipo_a
     // $_SESSION['aerolineas'][] = $aerolineas; otra forma de pushear los datos
     $_SESSION['aerolineas'] = $aerolineas;
 
-    echo "<h1>Aerolineas hasta ahora</h1><br>";
-    print_r($_SESSION['aerolineas']);
+    //echo "<h1>Aerolineas hasta ahora</h1><br>";
+    //print_r($_SESSION['aerolineas']);
 }
+
+// Metodo para buscar una aerolinea en particular atravez de su ID
+
+function obtenerAerolineaPorId($aerolinea_array, $id)
+{
+    // clasico metodo "find" de buscar un dato, pero usamos mejor foreach
+    foreach ($aerolinea_array as $aerolinea) {
+        if ($aerolinea->getId() == $id) {
+            return $aerolinea;
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -61,25 +74,64 @@ if (isset($_POST['nombre_aerolinea'], $_POST['cantidad_aviones'], $_POST['tipo_a
 <body style="background-color: gray;">
     <h1>Holiwis bienvenido a Aerolineas Jairito</h1>
 
-    <h3>Crear una nueva aerolinea</h3>
-    <form action="" method="POST">
-        <label for="nombre_aerolinea">Nombre Aerolinea: </label>
-        <input type="text" name="nombre_aerolinea" required>
+    <?php
+    if (isset($_GET['editar'])) {
+        $aerolineaEditable = obtenerAerolineaPorId($aerolineas, $_GET['editar']);
+        print_r($aerolineaEditable);
 
-        <label for="nombre_aerolinea">Cantidad Aviones: </label>
-        <input type="text" name="cantidad_aviones" required>
+    ?>
 
-        <label for="nombre_aerolinea">Tipo de Aerolinea: </label>
-        <select type="text" name="tipo_aerolinea">
-            <option value="Privado">Privado</option>
-            <option value="Comercial">Comercial</option>
-            <option value="Carga">Carga</option>
-            <option value="Nacional">Nacional</option>
-        </select>
-        <button type="submit">Crear</button>
+        <!-- FORMULARIO PARA EDITAR UNA AEROLINEA-->
+        <h3>Editar la aerolinea seleccionada</h3>
+        <form action="" method="POST">
+            <label for="nombre_aerolinea">Nombre Aerolinea: </label>
+            <input type="text" name="nombre_aerolinea" value="<?php echo $aerolineaEditable->getNombre() ?>" required>
 
-    </form>
+            <label for="nombre_aerolinea">Cantidad Aviones: </label>
+            <input type="text" name="cantidad_aviones" value="<?php echo $aerolineaEditable->getCant_aviones() ?>" required>
 
+            <label for="nombre_aerolinea">Tipo de Aerolinea: </label>
+            <select type="text" name="tipo_aerolinea">
+                <option value="Privado" <?php echo ($aerolineaEditable->getTipo_aerolinea() == 'Privado') ? 'selected' : ''; ?>>Privado</option>
+                <option value="Comercial" <?php echo ($aerolineaEditable->getTipo_aerolinea() == 'Comercial') ? 'selected' : ''; ?>>Comercial</option>
+                <option value="Carga" <?php echo ($aerolineaEditable->getTipo_aerolinea() == 'Carga') ? 'selected' : ''; ?>>Carga</option>
+                <option value="Nacional" <?php echo ($aerolineaEditable->getTipo_aerolinea() == 'Nacional') ? 'selected' : ''; ?>>Nacional</option>
+            </select>
+            <button type="submit">Editar</button>
+
+        </form>
+
+    <?php
+
+    } else {
+
+    ?>
+
+        <!-- FORMULARIO PARA CREAR UNA AEROLINEA-->
+        <h3>Crear una nueva aerolinea</h3>
+        <form action="" method="POST">
+            <label for="nombre_aerolinea">Nombre Aerolinea: </label>
+            <input type="text" name="nombre_aerolinea" required>
+
+            <label for="nombre_aerolinea">Cantidad Aviones: </label>
+            <input type="text" name="cantidad_aviones" required>
+
+            <label for="nombre_aerolinea">Tipo de Aerolinea: </label>
+            <select type="text" name="tipo_aerolinea">
+                <option value="Privado">Privado</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Carga">Carga</option>
+                <option value="Nacional">Nacional</option>
+            </select>
+            <button type="submit">Crear</button>
+
+        </form>
+
+    <?php
+
+    }
+
+    ?>
     <main>
         <table>
             <thead>
@@ -87,6 +139,7 @@ if (isset($_POST['nombre_aerolinea'], $_POST['cantidad_aviones'], $_POST['tipo_a
                 <th>Nombre</th>
                 <th>Cantidad de aviones</th>
                 <th>Tipo Aerolinea</th>
+                <th>Acciones</th>
             </thead>
             <tbody>
                 <?php
@@ -96,6 +149,10 @@ if (isset($_POST['nombre_aerolinea'], $_POST['cantidad_aviones'], $_POST['tipo_a
                             <td>{$aero->getNombre()}</td>
                             <td>{$aero->getCant_aviones()}</td>
                             <td>{$aero->getTipo_aerolinea()}</td>
+                            <td>
+                            <a href='?editar={$aero->getId()}'>Editar</a>
+                            <a href='#'>Eliminar</a>
+                            </td>
                         </tr> ";
                 }
                 ?>

@@ -27,37 +27,71 @@ if (!isset($_SESSION['aerolineas'])) {
 
 $aerolineas = $_SESSION['aerolineas'];
 
+// CREATE FORM -> el signo ! se le quita para solucionar error
+if (isset($_POST['createForm'])) {
 
-if (isset($_POST['nombre_aerolinea'], $_POST['cantidad_aviones'], $_POST['tipo_aerolinea'])) {
 
-    $id = rand(1, 1000);
-    $nombre = $_POST['nombre_aerolinea'];
-    $cant_aviones = $_POST['cantidad_aviones'];
-    $tipo_aero = $_POST['tipo_aerolinea'];
 
-    $aerolineacita = new Aerolinea($id, $nombre, $cant_aviones, $tipo_aero);
+    if (isset($_POST['nombre_aerolinea'], $_POST['cantidad_aviones'], $_POST['tipo_aerolinea'])) {
 
-    print_r($aerolineacita);
-    array_push($aerolineas, $aerolineacita);
-    //$aerolineas[] = $aerolineacita;
+        $id = rand(1, 1000);
+        $nombre = $_POST['nombre_aerolinea'];
+        $cant_aviones = $_POST['cantidad_aviones'];
+        $tipo_aero = $_POST['tipo_aerolinea'];
 
-    // $_SESSION['aerolineas'][] = $aerolineas; otra forma de pushear los datos
-    $_SESSION['aerolineas'] = $aerolineas;
+        $aerolineacita = new Aerolinea($id, $nombre, $cant_aviones, $tipo_aero);
 
-    //echo "<h1>Aerolineas hasta ahora</h1><br>";
-    //print_r($_SESSION['aerolineas']);
+        print_r($aerolineacita);
+        array_push($aerolineas, $aerolineacita);
+        //$aerolineas[] = $aerolineacita;
+
+        // $_SESSION['aerolineas'][] = $aerolineas; otra forma de pushear los datos
+        $_SESSION['aerolineas'] = $aerolineas;
+
+        //echo "<h1>Aerolineas hasta ahora</h1><br>";
+        //print_r($_SESSION['aerolineas']);
+    }
 }
-
 // Metodo para buscar una aerolinea en particular atravez de su ID
 
-function obtenerAerolineaPorId($aerolinea_array, $id)
-{
-    // clasico metodo "find" de buscar un dato, pero usamos mejor foreach
-    foreach ($aerolinea_array as $aerolinea) {
-        if ($aerolinea->getId() == $id) {
+
+function obtenerAerolineaPorId($aerolineas, $id){
+    foreach($aerolineas as $aerolinea){
+        if($aerolinea->getId() == $id){
             return $aerolinea;
         }
     }
+}
+
+// EDIT FORM
+if( isset($_POST['updateForm'])){
+    //La logica para actualizar una aerolinea ira aca dentro
+    foreach($aerolineas as $aerolinea){
+        if($aerolinea->getId() == $_GET['editar'] ){
+
+            $aerolinea->setNombre($_POST['nombre_aerolinea']);
+            $aerolinea->setCant_aviones($_POST['cantidad_aviones']);
+            $aerolinea->setTipo_aerolinea($_POST['tipo_aerolinea']);
+        }
+    }
+    header('Location: /PHP/POO/proyecto_aerolinea/index.php');
+}
+
+
+//DELETE
+if(isset($_GET['eliminar'])){
+    print_r($_GET['eliminar']);
+
+    foreach($aerolineas as $idx => $aerolinea){
+
+        if($aerolinea->getId() == $_GET['eliminar'] ){
+            unset($aerolineas[$idx]);
+            break;
+        }
+    }
+
+    $_SESSION['aerolineas'] = $aerolineas;
+    header('Location: /PHP/POO/proyecto_aerolinea/index.php');
 }
 
 ?>
@@ -84,13 +118,15 @@ function obtenerAerolineaPorId($aerolinea_array, $id)
         <!-- FORMULARIO PARA EDITAR UNA AEROLINEA-->
         <h3>Editar la aerolinea seleccionada</h3>
         <form action="" method="POST">
+            <input type="hidden" name="updateForm" value="editForm">
+
             <label for="nombre_aerolinea">Nombre Aerolinea: </label>
             <input type="text" name="nombre_aerolinea" value="<?php echo $aerolineaEditable->getNombre() ?>" required>
 
-            <label for="nombre_aerolinea">Cantidad Aviones: </label>
+            <label for="cantidad_aviones">Cantidad Aviones: </label>
             <input type="text" name="cantidad_aviones" value="<?php echo $aerolineaEditable->getCant_aviones() ?>" required>
 
-            <label for="nombre_aerolinea">Tipo de Aerolinea: </label>
+            <label for="tipo_aerolinea">Tipo de Aerolinea: </label>
             <!-- RETO RESUELTO - Aplicar propiedad selected al tipo_aerolinea seleccionado correctamente con ternario -->
             <select type="text" name="tipo_aerolinea">
                 <option value="Privado" <?php echo ($aerolineaEditable->getTipo_aerolinea() == 'Privado') ? 'selected' : ''; ?>>Privado</option>
@@ -111,6 +147,9 @@ function obtenerAerolineaPorId($aerolinea_array, $id)
         <!-- FORMULARIO PARA CREAR UNA AEROLINEA-->
         <h3>Crear una nueva aerolinea</h3>
         <form action="" method="POST">
+            
+            <input type="hidden" name="createForm" value="createForm">
+
             <label for="nombre_aerolinea">Nombre Aerolinea: </label>
             <input type="text" name="nombre_aerolinea" required>
 
@@ -152,7 +191,7 @@ function obtenerAerolineaPorId($aerolinea_array, $id)
                             <td>{$aero->getTipo_aerolinea()}</td>
                             <td>
                             <a href='?editar={$aero->getId()}'>Editar</a>
-                            <a href='#'>Eliminar</a>
+                            <a href='?eliminar={$aero->getId()}'>Eliminar</a>
                             </td>
                         </tr> ";
                 }
@@ -162,5 +201,5 @@ function obtenerAerolineaPorId($aerolinea_array, $id)
         </table>
     </main>
 </body>
-
 </html>
+

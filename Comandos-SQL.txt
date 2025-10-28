@@ -1,4 +1,7 @@
 ** CONSULTAS SQL **
+************************************************************************************
+                                 CLASE 22/10/25
+************************************************************************************
 
 CREATE DATABASE bootcampfsj30;
 
@@ -44,3 +47,54 @@ ALTER TABLE estudiantes ADD id_curso INT;
 
 
 ALTER TABLE estudiantes ADD CONSTRAINT fk_curso_estudiante FOREIGN KEY (id_curso) REFERENCES cursos(id);
+
+************************************************************************************
+                                 CLASE 27/10/25
+************************************************************************************
+
+ALTER TABLE estudiantes ADD CONSTRAINT fk_curso_estudiante FOREIGN KEY (id_curso) REFERENCES cursos(id);
+
+INSERT INTO cursos (nombre) VALUES 
+('Programacion'),
+('Bases de datos'),
+('Analisis de datos');
+
+INSERT INTO estudiantes (nombre,edad, promedio, id_curso) VALUES
+('Mauricio', 21,9.50, 3),
+('Hector', 21,8.50, 2),
+('Valentina', 21,8, 1),
+('Esteban', 21,7.10, 3);
+
+SELECT  estudiantes.id, estudiantes.nombre, estudiantes.edad, estudiantes.promedio, estudiantes.id_curso, cursos.nombre AS nombre_curso
+FROM estudiantes INNER JOIN cursos ON estudiantes.id_curso = cursos.id;
+
+
+-- Mostrar un listado de alumnos de bases de datos que tengan promedio mayor a 8.50
+
+SELECT  estudiantes.id, estudiantes.nombre, estudiantes.edad, estudiantes.promedio, estudiantes.id_curso, cursos.nombre AS nombre_curso
+FROM estudiantes INNER JOIN cursos ON estudiantes.id_curso = cursos.id 
+WHERE cursos.nombre = 'Bases de datos' AND estudiantes.promedio > 8.50;
+
+
+-- Mostrar o contar el numero total de estudiantes de X curso -> FUNCION COUNT
+
+SELECT cursos.nombre, COUNT(estudiantes.id) AS cantidad_estudiantes FROM cursos
+INNER JOIN estudiantes ON cursos.id = estudiantes.id_curso
+GROUP BY cursos.nombre ORDER BY cantidad_estudiantes DESC;
+
+-- Mostrar el promedio de edad por curso
+
+-- SELECT cursos.nombre, AVG(estudiantes.edad) AS promedio_edad_estudiantes FROM cursos
+-- INNER JOIN estudiantes ON cursos.id = estudiantes.id_curso
+-- GROUP BY cursos.nombre;
+
+-- Mostrar los cursos que tengan un promedio de notas mayor a 8
+-- EL RESULTADO DE LAS FUNCIONES -> SE LE LLAMA EN SQL RESULTADO DE AGREGACION
+SELECT cursos.nombre , AVG(estudiantes.promedio) FROM cursos
+INNER JOIN estudiantes ON cursos.id = estudiantes.id_curso
+GROUP BY cursos.nombre
+HAVING  AVG(estudiantes.promedio)  > 8.00;
+
+SELECT cursos.nombre, COUNT(estudiantes.id) AS cantidad_estudiantes FROM cursos
+LEFT JOIN estudiantes ON cursos.id = estudiantes.id_curso
+GROUP BY cursos.nombre ORDER BY cantidad_estudiantes DESC;

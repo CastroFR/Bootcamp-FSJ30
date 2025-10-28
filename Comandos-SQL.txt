@@ -1,0 +1,46 @@
+** CONSULTAS SQL **
+
+CREATE DATABASE bootcampfsj30;
+
+USE bootcampfsj30;
+
+CREATE TABLE estudiantes(
+	nombre varchar(100),
+	edad int(3),
+	promedio decimal
+);
+
+USE bootcampfsj30;
+
+ALTER TABLE estudiantes MODIFY COLUMN promedio DECIMAL(3,2);
+
+ALTER TABLE estudiantes ADD id INT PRIMARY KEY NOT NULL AUTO_INCREMENT;
+
+-- INSERT INTO estudiantes (nombre, edad, promedio) VALUES ('Jairo',77,8.1); 
+-- INSERT INTO estudiantes (nombre, edad, promedio) VALUES ('Jorge',22,9.5); 
+-- TRUNCATE TABLE estudiantes;
+
+
+-- SELECT * FROM estudiantes WHERE promedio > 9;
+
+-- UPDATE estudiantes SET promedio = 7.5 WHERE id = 1;
+-- START TRANSACTION; 
+
+-- DELETE FROM estudiantes WHERE id = 1;
+
+-- SELECT * FROM estudiantes;
+
+-- ROLLBACK;
+
+-- Crear una tabla cursos id_curso, nombre_curso
+
+CREATE TABLE cursos( 
+	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    nombre varchar(100) NOT NULL
+);
+
+
+ALTER TABLE estudiantes ADD id_curso INT;
+
+
+ALTER TABLE estudiantes ADD CONSTRAINT fk_curso_estudiante FOREIGN KEY (id_curso) REFERENCES cursos(id);

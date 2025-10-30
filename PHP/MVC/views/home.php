@@ -1,3 +1,7 @@
+<?php
+    print_r($estudiantes);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,9 @@
 </head>
 <body class="bg-light">
     <?php include './views/layouts/navbar.php'?>
+
     <main class="container mt-2">
+        <a href="./index.php?action=create" class="btn btn-success">Agregar Estudiante</a>
         <table class="table m-2">
             <thead>
                 <tr>
@@ -20,13 +26,15 @@
                 </tr>
             </thead>
             <tbody>
+                <?php foreach($estudiantes as $estudiante) { ?>
                 <tr scope="row">
-                    <td>1</td>
-                    <td>Juan</td>
-                    <td>20</td>
-                    <td>8.5</td>
-                    <td>Matemáticas</td>
+                    <td><?php echo $estudiante['id']; ?></td>
+                    <td><?php echo $estudiante['nombre']; ?></td>
+                    <td><?php echo $estudiante['edad']; ?></td>
+                    <td><?php echo $estudiante['promedio']; ?></td>
+                    <td><?php echo $estudiante['id_curso']; ?></td>
                 </tr>
+                <?php } ?>
             </tbody>
         </table>
     </main>

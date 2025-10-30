@@ -3,16 +3,27 @@ require_once './models/Estudiante.php';
 require_once './config/Database.php';
 require_once './interfaces/EstudianteModelInterface.php';
 
-class EstudianteController {
+class EstudianteController
+{
     private $estudianteModel;
 
+    // Constructor con probelmas a resolver luego, sobrecarga de responsabilidades | SOLID
+    /*         public function __construct() {
+        $database = new Database();
+        $db = $database->getConnection();
+        $this->estudianteModel = new Estudiante($db);
+    }
+ */
+
     // Ahora el constructor recibe el modelo a traves de inyeccion de dependencias
-    public function __construct(EstudianteModelInterface $model) {
+    public function __construct(EstudianteModelInterface $model)
+    {
         $this->estudianteModel = $model;
     }
 
     // Este método ayuda a crear el controlador cuando lo necesitemos
-    public static function crear() {
+    public static function crear()
+    {
         $db = (new Database())->getConnection();
         $model = new Estudiante($db);
         return new self($model);
@@ -20,14 +31,14 @@ class EstudianteController {
 
     // vamos a crear los metodos de manejar la logica para despues darle los datos a las vistas
 
-    public function read(){
+    public function read()
+    {
         $estudiantes = $this->estudianteModel->getAll();
         include_once './views/home.php';
     }
 
-    public function create(){
+    public function create()
+    {
         include_once './views/create.php';
-    }    
+    }
 }
-
-?>

@@ -1,7 +1,3 @@
-<?php
-    print_r($estudiantes);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +10,7 @@
     <?php include './views/layouts/navbar.php'?>
 
     <main class="container mt-2">
-        <a href="./index.php?action=create" class="btn btn-success">Agregar Estudiante</a>
+        <a href="./index.php?action=create" class="btn btn-success">Agregar estudiante</a>
         <table class="table m-2">
             <thead>
                 <tr>
@@ -23,6 +19,7 @@
                     <th scope="col">Edad</th>
                     <th scope="col">Promedio</th>
                     <th scope="col">Curso</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +29,11 @@
                     <td><?php echo $estudiante['nombre']; ?></td>
                     <td><?php echo $estudiante['edad']; ?></td>
                     <td><?php echo $estudiante['promedio']; ?></td>
-                    <td><?php echo $estudiante['id_curso']; ?></td>
+                    <td><?php echo $estudiante['nombre_curso']; ?></td>
+                    <td class="row">
+                        <a class="btn btn-danger col-4 me-2" href="./index.php?action=delete&id=<?php echo $estudiante['id']; ?>">Eliminar</a>
+                        <a class="btn btn-primary col-4 " href="./index.php?action=update&id=<?php echo $estudiante['id']; ?>">Editar</a>
+                    </td>
                 </tr>
                 <?php } ?>
             </tbody>

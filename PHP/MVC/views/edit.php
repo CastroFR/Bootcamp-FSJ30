@@ -12,15 +12,22 @@
             <h2 class="text-center">Editar alumno</h2>
         <section class="d-flex justify-content-center">
             <article class="card col-8" >
-            <form class="form-control" action="" method="POST">
+            <form class="form-control" action="./index.php?action=update" method="POST">
+                <input type="hidden" name="id" value="<?php echo $estudiante['id']; ?>">
                 <label class="form-label" for="">Nombre</label>
-                <input class='form-control' type="text" name="nombre" >
+                <input class='form-control' type="text" name="nombre" value="<?php echo $estudiante['nombre']; ?>">
                 <label class="form-label" for="">Edad</label>
-                <input class='form-control' type="number" name="edad" >
+                <input class='form-control' type="number" name="edad" value="<?php echo $estudiante['edad']; ?>">
                 <label class="form-label" for="">Promedio</label>
-                <input class='form-control' type="text" name="promedio" >
+                <input class='form-control' type="text" name="promedio" value="<?php echo $estudiante['promedio']; ?>">
                 <label class="form-label" for="">Curso</label>
-                <input class='form-control' type="number" name="curso" >
+                <select class="form-control" name="curso">
+                    <?php foreach($cursos as $curso) { ?>
+                        <option value="<?php echo $curso['id']; ?>" <?php if($curso['id'] === $estudiante['id_curso']) echo 'selected'; ?>>
+                            <?php echo $curso['nombre']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
                 <button class="btn btn-success mt-2" type="submit">Editar</button>
             </form>
             </article>

@@ -9,10 +9,10 @@
 <body>
     <?php include './views/layouts/navbar.php'?>
     <main class="container mt-2"> 
-            <h2 class="text-center">Agregar nuevo alumno</h2>
+            <h2 class="text-center">Agregar nuevo estudiante</h2>
         <section class="d-flex justify-content-center">
             <article class="card col-8" >
-            <form class="form-control" action="" method="POST">
+            <form class="form-control" action="./index.php?action=create" method="POST">
                 <label class="form-label" for="">Nombre</label>
                 <input class='form-control' type="text" name="nombre">
                 <label class="form-label" for="">Edad</label>
@@ -20,7 +20,13 @@
                 <label class="form-label" for="">Promedio</label>
                 <input class='form-control' type="text" name="promedio">
                 <label class="form-label" for="">Curso</label>
-                <input class='form-control' type="number" name="curso">
+                <select class="form-control" name="curso">
+                    <?php foreach($cursos as $curso) { ?>
+                        <option value="<?php echo $curso['id']; ?>" <?php if($curso['id'] === $estudiante['id_curso']) echo 'selected'; ?>>
+                            <?php echo $curso['nombre']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
                 <button class="btn btn-success mt-2" type="submit">Agregar</button>
             </form>
             </article>

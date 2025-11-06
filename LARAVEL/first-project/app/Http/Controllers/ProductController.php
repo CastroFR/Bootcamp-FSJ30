@@ -12,7 +12,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // Codigo del metodo con Eloquent
+        $products = Product::all();
+
+        return response()->json([
+            'data' => $products,
+            'message' => 'Products retrieved successfully',
+            'status' => 200
+        ], 200);
     }
 
     /**
@@ -28,7 +35,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Para guardar datos con Eloquent - creando metodo para guardar un nuevo registro en la tabla products
+        $product = Product::create($request->all());
+
+        return response()->json([
+            'data' => $product,
+            'message' => 'Product created successfully',
+            'status' => 201
+        ], 201);
     }
 
     /**

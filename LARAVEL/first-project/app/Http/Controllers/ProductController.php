@@ -12,6 +12,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        //Query Builder
+        //$products = Product::getAllProducts();
+        // Eloquent 
         // Codigo del metodo con Eloquent
         $products = Product::all();
 
@@ -35,14 +38,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        /* sintaxis vieja 
+        $product = new Product();
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        
+        $product->save();
+        */
+        
+        //uso de query builder
+        //Product::saveProduct($request->name, $request->description, $request->price);
+        
         // Para guardar datos con Eloquent - creando metodo para guardar un nuevo registro en la tabla products
+        //Eloquent -> create metodo estatico para crear un nuevo registro en la tabla products
         $product = Product::create($request->all());
 
         return response()->json([
             'data' => $product,
             'message' => 'Product created successfully',
             'status' => 201
-        ], 201);
+        ],201);
     }
 
     /**
@@ -64,9 +80,30 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request,string $id)
     {
-        //
+        //Manejo de errores
+        try{
+            //Buscamos el producto por su id
+            $product = Product::findOrFail($id);
+
+            //Actualizamos el producto en cuestion
+            $product->update($request->all());
+
+            return response()->json([
+                'data' => $product,
+                'message' => 'Product updated successfully',
+                'status' => 200
+            ],200
+        );
+
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => 'Error updating product',
+                'error' => $e->getMessage(),
+                'status' => 500
+            ],500);
+        }
     }
 
     /**

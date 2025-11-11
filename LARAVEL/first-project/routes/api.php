@@ -13,6 +13,8 @@ Route::get('/user', function (Request $request) {
 //Route::get('/products', [App\Http\Controllers\ProductController::class, 'index']);
 //2da forma de utilizar el controlador
 // http://localhost:8000/api/products
-Route::get('/products', [ProductController::class, 'index']); //obtenemos datos
+Route::get('/products', [ProductController::class, 'index']);
 // http://localhost:8000/api/products
-Route::post('/products', [ProductController::class, 'store']); //enviamos datos
+Route::post('/products', [ProductController::class, 'store']);
+// http://localhost:8000/api/products/1
+Route::put('/products/{id}', [ProductController::class, 'update']);

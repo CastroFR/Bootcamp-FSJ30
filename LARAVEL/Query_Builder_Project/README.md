@@ -7,6 +7,42 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Estructura de la Base de Datos
+
+### Tabla: users
+- `id` - BIGINT (Primary Key, Auto Increment)
+- `name` - VARCHAR(255)
+- `email` - VARCHAR(255) UNIQUE
+- `telephone` - VARCHAR(255) NULLABLE
+- `created_at` - TIMESTAMP
+- `updated_at` - TIMESTAMP
+
+### Tabla: pedidos
+- `id` - BIGINT (Primary Key, Auto Increment)
+- `user_id` - BIGINT (Foreign Key to users)
+- `producto` - VARCHAR(255)
+- `cantidad` - INT
+- `total` - DECIMAL(10,2)
+- `created_at` - TIMESTAMP
+- `updated_at` - TIMESTAMP
+
+## Endpoints Disponibles
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `GET` | `/` | Lista todos los endpoints disponibles |
+| `GET` | `/insertar-datos` | Inserta datos de ejemplo en las tablas users y pedidos |
+| `GET` | `/pedidos-usuario-2` | Recupera todos los pedidos asociados al usuario con ID 2 |
+| `GET` | `/pedidos-con-usuarios` | Obtiene información detallada de los pedidos, incluyendo nombre, email y teléfono de los usuarios |
+| `GET` | `/pedidos-rango-100-250` | Recupera todos los pedidos cuyo total esté en el rango de $100 a $250 |
+| `GET` | `/usuarios-con-r` | Encuentra todos los usuarios cuyos nombres comiencen con la letra "R" |
+| `GET` | `/total-pedidos-usuario-5` | Calcula el total de registros en la tabla de pedidos para el usuario con ID 5 |
+| `GET` | `/pedidos-ordenados-desc` | Recupera todos los pedidos junto con la información de los usuarios, ordenados de forma descendente según el total del pedido |
+| `GET` | `/suma-total-pedidos` | Obtiene la suma total del campo "total" en la tabla de pedidos |
+| `GET` | `/pedido-mas-economico` | Encuentra el pedido más económico, junto con el nombre y teléfono del usuario asociado |
+| `GET` | `/pedidos-agrupados-usuario` | Obtiene el producto, la cantidad y el total de cada pedido, agrupados por usuario |
+| `GET` | `/usuarios-telephone` | Muestra todos los usuarios con su información de teléfono |
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

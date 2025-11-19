@@ -58,11 +58,11 @@ class UserController extends Controller
             //$user = Auth::user();
 
             //Declaramos el tiemppo de expiracion del token, con Carbon
-            $expirationTimeToken = Carbon::now()->addHours(3); //3 horas tiempo de expiracion
+            $expirationTimeToken = Carbon::now()->addMinutes(3); //3 horas tiempo de expiracion
 
             //Generamos un token de acceso para el usuario autenticado
             
-            $token = $user->createToken('auth_token',['server:update'],)->plainTextToken;
+            $token = $user->createToken('auth_token',['server:update'],$expirationTimeToken)->plainTextToken;
 
             return response()->json([
                 'message' => 'User logged successfully',
@@ -71,5 +71,21 @@ class UserController extends Controller
                 'status' => 200
             ],200);
         }
+    }
+
+    public function logout(Request $request){
+        // Obtenemos el user logeado en este caso a traves del request (no se pasa en el body) en el authorization
+        $user = $request->user();
+
+        // Revocamos ese token,  hace que el token quede invalidado y que el usuario tenga que generar uno nuevo
+        $user->currentAccessToken()->delete();
+
+        //Revocamos TODOS los tokens activos => sirve para cambios de contrase;a o una funcionalidad en especifico de cerrar todas las sesiones del usuario
+        //$user->tokens()->delete
+
+        return response()->json([
+            'message' => 'User logged out successfully',
+            'status' => 200
+        ],200);
     }
 }

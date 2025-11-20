@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Exception;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,7 +13,22 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        try{
+        // Query Builder
+
+        // Elocuent
+        $posts = Post::with(['user'])->get();
+
+        return response()->json([
+            'data' => $posts,
+            'status' => 200
+        ],200);
+
+        }catch(Exception $error){
+            return response()->json([
+                'error' => $error->getMessage()
+            ]);
+        }
     }
 
     /**
@@ -29,6 +45,28 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        try{
+        $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string'
+        ]);
+
+        // Create con eloquent y sin los modelos relacionados
+        //$post = Post::create($request->all());
+        //crate los modelos relacionados
+        $post = $request->user()->posts()->create($request->all());
+
+        return response()->json([
+            'message' => 'Post Created Successfully',
+            'data' => $post,
+            'status' => 201
+        ],201);
+
+        }catch(Exception $error){
+            return response()->json([
+                'error' => $error->getMessage()
+            ]);
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,7 +14,7 @@ class UserController extends Controller
     // registrar usuarios
     public function register(Request $request){
         try{
-
+            // Validamos los datos del request o la peticion
         $request->validate([
             'name' => 'required|string|max:255|unique:users|alpha|min:8|regex:/^[a-zA-Z0-9._%+-]+$/',
             'email' => 'required|string|email|max:255|unique:users',
@@ -23,13 +24,13 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password)
         ]);
 
         return response()->json([
             'message' => 'User registered successfully',
-            'user' => '$user',
-            'status' => 201,
+            'user' => $user,
+            'status' => 201
         ],201);
 
         } catch (\Exception $error) {
@@ -58,7 +59,7 @@ class UserController extends Controller
             //$user = Auth::user();
 
             //Declaramos el tiemppo de expiracion del token, con Carbon
-            $expirationTimeToken = Carbon::now()->addMinutes(3); //3 horas tiempo de expiracion
+            $expirationTimeToken = Carbon::now()->addMinutes(30); //3 horas tiempo de expiracion
 
             //Generamos un token de acceso para el usuario autenticado
             

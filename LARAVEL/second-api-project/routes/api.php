@@ -18,7 +18,17 @@ Route::post('/login',[UserController::class, 'login']);
 // http://localhost:8000/api/logout
 Route::post('/logout',[UserController::class, 'logout'])->middleware('auth:sanctum');
 
-// http://localhost:8000/api/posts
+/* // http://localhost:8000/api/posts
 Route::get('/posts', [PostController::class, 'index'])->middleware('auth:sanctum');
 
-Route::post('/posts', [PostController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/posts', [PostController::class, 'store'])->middleware('auth:sanctum');
+
+Route::put('/post/{id}', [PostController::class, 'update'])->middleware('auth:sanctum'); */
+
+// http://localhost:8000/api/URI
+// Route::get('URI')
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/posts', [PostController::class, 'index'])->middleware('auth:sanctum');
+    Route::post('/posts', [PostController::class, 'store'])->middleware('auth:sanctum');
+    Route::put('/post/{id}', [PostController::class, 'update'])->middleware('auth:sanctum');
+});

@@ -13,18 +13,18 @@ class PostController extends Controller
      */
     public function index()
     {
-        try{
-        // Query Builder
+        try {
+            // Query Builder
+            // return Post::getAllPostsWithAuthorsQueryBuilder();
 
-        // Elocuent
-        $posts = Post::with(['user'])->get();
+            // Elocuent
+            $posts = Post::with(['user'])->get();
 
-        return response()->json([
-            'data' => $posts,
-            'status' => 200
-        ],200);
-
-        }catch(Exception $error){
+            return response()->json([
+                'data' => $posts,
+                'status' => 200
+            ], 200);
+        } catch (Exception $error) {
             return response()->json([
                 'error' => $error->getMessage()
             ]);
@@ -45,24 +45,33 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        try{
-        $request->validate([
-            'title' => 'required|string',
-            'content' => 'required|string'
-        ]);
+        try {
+            $request->validate([
+                'title' => 'required|string',
+                'content' => 'required|string'
+            ]);
 
-        // Create con eloquent y sin los modelos relacionados
-        //$post = Post::create($request->all());
-        //crate los modelos relacionados
-        $post = $request->user()->posts()->create($request->all());
+            // Create con eloquent y sin los modelos relacionados
+            //$post = Post::create($request->all());
 
-        return response()->json([
-            'message' => 'Post Created Successfully',
-            'data' => $post,
-            'status' => 201
-        ],201);
+            //crate los modelos relacionados
+            $post = $request->user()->posts()->create($request->all());
 
-        }catch(Exception $error){
+            // Create extrayendo los datos del request y extrayendo el user_id del usuario autenticado, sintaxis alternativa a la anterior
+            /* 
+            $postcito = Post::create([
+                'title' => $request->title,
+                'content' => $request->content,
+                'user_id' => $request->user()->id
+            ]);
+            */
+
+            return response()->json([
+                'message' => 'Post Created Successfully',
+                'data' => $post,
+                'status' => 201
+            ], 201);
+        } catch (Exception $error) {
             return response()->json([
                 'error' => $error->getMessage()
             ]);
@@ -88,9 +97,37 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, string $id)
     {
         //
+        try {
+            //Buscar el post por su id y sino falla la ejecucion actualizamos el post
+            $post = Post::findOrFail($id);
+
+            //Actualizamos el post
+            $post->update($request->all());
+
+            /* //Segunda Manera de actualizar
+            $request->title && $post->title = $request->title;
+            $post->content = $request->content;
+            $post->save(); */
+
+            /*  //Tercera manera para actualizar en especifico, la mas adecuada o nueva
+            $post->update([
+                'title' => $request->title,
+                'content' => $request->content
+            ]); */
+
+            return response()->json([
+                'message' => 'Post Updated Successfully',
+                'data' => $post,
+                'status' => 200
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'error' => $error->getMessage()
+            ]);
+        }
     }
 
     /**

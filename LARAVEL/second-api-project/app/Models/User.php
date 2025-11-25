@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Post;
+use App\Models\Comment;
 
 class User extends Authenticatable
 {
@@ -48,7 +49,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany(Post::class); //con esto le decimos a laravel que los 2 models post y user estan relacionados
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

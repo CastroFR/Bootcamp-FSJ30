@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -28,7 +29,10 @@ Route::put('/post/{id}', [PostController::class, 'update'])->middleware('auth:sa
 // http://localhost:8000/api/URI
 // Route::get('URI')
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/posts', [PostController::class, 'index'])->middleware('auth:sanctum');
-    Route::post('/posts', [PostController::class, 'store'])->middleware('auth:sanctum');
-    Route::put('/post/{id}', [PostController::class, 'update'])->middleware('auth:sanctum');
+    Route::get('/posts', [PostController::class, 'index']);
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::put('/post/{id}', [PostController::class, 'update']);
+
+    Route::get('/comments', [CommentController::class, 'index']);
+    Route::post('/comments', [CommentController::class, 'store']);
 });

@@ -68,6 +68,7 @@ class UserController extends Controller
             return response()->json([
                 'message' => 'User logged successfully',
                 'user' => $user,
+                'type_token' => 'Bearer',
                 'token' => $token,
                 'status' => 200
             ],200);
@@ -88,5 +89,49 @@ class UserController extends Controller
             'message' => 'User logged out successfully',
             'status' => 200
         ],200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+        try {
+            $user = User::findOrFail($id);
+
+            $user->delete();
+
+            return response()->json([
+                'message' => 'User Deleted Successfully',
+                'status' => 200
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'error' => $error->getMessage()
+            ]);
+        }
+    }
+
+
+    public function restore(string $id)
+    {
+        try {
+            //Buscar el post por su id
+            $user = User::withTrashed()->findOrFail($id);
+
+            $user->restore();
+
+            return response()->json([
+                'message' => 'User Restored Successfully',
+                'data' => $user,
+                'status' => 200
+            ], 200);
+
+        } catch (\Exception $error) {
+            return response()->json([
+                'error' => $error->getMessage()
+            ]);
+        }
     }
 }

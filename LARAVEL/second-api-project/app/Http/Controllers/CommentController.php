@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use Exception;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -92,13 +93,69 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         //
+        try {
+            //Validar si el comentario existe
+            $comment = Comment::findOrFail();
+
+            $request->validate([
+                'content' => 'required|string'
+            ]);
+
+            $comment->update([
+                'content' => $request->content
+            ]);
+
+            return response()->json([
+                'message' => 'Comment updated successfully',
+                'data' => $comment,
+                'status' => 200
+            ], 200);
+        } catch (\Exception $error) {
+            return response()->json([
+                'error' => $error->getMessage()
+            ]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy(String $id)
     {
         //
+        try {
+            $comment = Comment::findOrFail($id);
+
+            $comment->delete();
+
+            return response()->json([
+                'message' => 'Comment Deleted Successfully',
+                'status' => 200
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'error' => $error->getMessage()
+            ]);
+        }
+    }
+
+    public function restore(string $id)
+    {
+        try {
+            //Buscar el comment por su id
+            $comment = Comment::withTrashed()->findOrFail($id);
+
+            $comment->restore();
+
+            return response()->json([
+                'message' => 'Comment Restored Successfully',
+                'data' => $comment,
+                'status' => 200
+            ], 200);
+        } catch (\Exception $error) {
+            return response()->json([
+                'error' => $error->getMessage()
+            ]);
+        }
     }
 }

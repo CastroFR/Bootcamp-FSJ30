@@ -32,7 +32,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/posts', [PostController::class, 'index']);
     Route::post('/posts', [PostController::class, 'store']);
     Route::put('/post/{id}', [PostController::class, 'update']);
+    Route::delete('/post/{id}', [PostController::class, 'destroy']);
+    Route::put('/post/{id}/restore', [PostController::class, 'restore']); //puede ser put o patch, de modo que entienda que es una actualizacion
+
+    Route::delete('/user/{id}', [UserController::class, 'destroy']);
+    Route::put('/user/{id}/restore', [UserController::class, 'restore']);
 
     Route::get('/comments', [CommentController::class, 'index']);
     Route::post('/comments', [CommentController::class, 'store']);
+    Route::delete('/comment/{id}', [CommentController::class, 'destroy']);
+    Route::put('/comment/{id}/restore', [CommentController::class, 'restore']);
 });

@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Comment extends Model
 {
+    use SoftDeletes;
     //
     protected $fillable = [
         'content',
@@ -29,6 +31,8 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
+    //Este metodo esta en el modelo y no en el controller de Comment, por que el modelo está interactuando con la BD, es decir se encarga de interactuar con la BD, 
+    //por qur el controlador solo termina ejecutando las consultas pero no tiene por que saber la logica detras de esto.
     public function getCommentsWithUsersAndPostsQueryBuilder()
     {
         return DB::table('comments')

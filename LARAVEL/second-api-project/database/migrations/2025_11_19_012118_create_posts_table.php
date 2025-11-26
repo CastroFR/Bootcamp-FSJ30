@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->foreignId('user_id')->constrained('users','id')->onDelete('cascade')->onUpdate('cascade');
+            //$table->softDeletes(); - en caso de utilizarlo se agrega desde un inicio, sino luego se agrega mediante la terminal con Laravel
             $table->timestamps();
         });
     }
